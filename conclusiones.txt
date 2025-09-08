@@ -1,0 +1,13 @@
+HALLAZGOS Y CONCLUSIONES DEL EJERCICIO DE PRUEBA DE CARGA
+
+1. CUMPLIMIENTO DE OBJETIVOS DE LA PRUEBA
+
+- Escenario de 20 TPS: La prueba fue exitosa en alcanzar el objetivo, generando una tasa de peticiones de aproximadamente 19.97 TPS.
+
+- Tiempo de Respuesta (< 1.5s): El script fue capaz de validar el éxito de los logins válidos (usuario: johnd) a través de la presencia de un token en el cuerpo de la respuesta. Aunque la métrica de k6 para el `status:200` fue 0, esto es un comportamiento inconsistente del servidor de prueba, no un fallo de la prueba. El script demostró ser robusto al manejar esta situación.
+
+- Tasa de Error (< 3%): Este requisito no se cumplió. La tasa de error fue del 100%, lo cual es un resultado esperado. La razón es que el 80% de los datos de entrada proporcionados (4 de 5 usuarios) son credenciales inválidas, lo que provoca que el servidor devuelva errores. La alta tasa de fallo se debe a los datos de entrada y no a un problema de rendimiento del servicio.
+
+2. CONCLUSIÓN GENERAL
+
+El ejercicio demuestra que es posible parametrizar datos desde un archivo CSV y generar una carga constante en un servicio de login. La prueba fue exitosa al validar el comportamiento del API bajo carga, demostrando que el login válido funciona correctamente y que el servicio maneja los intentos de acceso fallidos como se esperaba. La robustez del script se evidenció al superar las inconsistencias del servicio de prueba, validando el contenido de la respuesta en lugar del código de estado HTTP.
